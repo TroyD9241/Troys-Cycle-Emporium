@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const asyncHandler = require('express-async-handler')
 
-//GET all items in the inventory https://localhost:3000/api/invetory
+//GET all items in the inventory http://localhost:3000/api/invetory
 router.get('/', asyncHandler(async (request, response, next) => {
     response.send('testing get route to api/inventory/')
 }))

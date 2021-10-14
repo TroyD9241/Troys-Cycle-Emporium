@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const asyncHandler = require('express-async-handler')
 
-//GET all scheduled repair appointments https://localhost:3000/api/repairs
+//GET all scheduled repair appointments http://localhost:3000/api/repairs
 router.get('/', asyncHandler(async (request, response, next) => {
     response.send('testing get route to api/repairs/')
 }))
@@ -26,7 +26,7 @@ router.delete('/:{id}', asyncHandler(async (request, response, next) => {
     response.send('testing DELETE Route to api/repairs/{id}')
 }))
 
-// POST repair date change by ID https://localhost:3000/api/repairs/1/schedule
+// POST repair date change by ID http://localhost:3000/api/repairs/1/schedule
 router.post('/:{id}/schedule', asyncHandler(async (request, response, next) => {
     response.send('testing POST Route to api/repairs/{id}/schedule')
 }))
