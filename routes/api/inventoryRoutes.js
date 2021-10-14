@@ -21,7 +21,7 @@ router.post('/', asyncHandler(async (request, response, next) => {
         amountAvailable: amountAvailable
     })
     await inventoryItem.save()
-    response.json('confirmed!')
+    response.json(inventoryItem)
 }))
 
 // GET a single inventory item by ID http://localhost:3000/api/inventory/1
@@ -50,7 +50,7 @@ router.put('/:id', asyncHandler(async (request, response, next) => {
 
 // DELETE inventory item by ID http://localhost:3000/api/inventory/1
 router.delete('/:id', asyncHandler(async (request, response, next) => {
-    const deletedInventoryItem = await Inventory.remove({ _id: request.params.id })
+    const deletedInventoryItem = await Inventory.deleteOne({ _id: request.params.id })
     response.json(deletedInventoryItem)
 }))
 
