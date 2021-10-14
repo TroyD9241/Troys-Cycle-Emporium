@@ -5,15 +5,15 @@
         "title": "Troys Cycle Emporium",
         "description": "Project for SupplyHive",
         "license": {
-            "name": "MIT",
-            "url": "https://opensource.org/licenses/MIT"
+            "name": "Troy Dawson",
+            "url": "https://www.linkedin.com/in/troyd41/"
         }
     },
     "host": "localhost:3000",
     "basePath": "/",
     "tags": [
         {"name": "Customers",
-        "description": "API for the shop staff"
+        "description": "Allows shop staff to interact with the customers that have had repairs done"
         }
     ],
     "schemes": ["http"],

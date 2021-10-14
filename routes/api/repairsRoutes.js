@@ -1,19 +1,30 @@
 const router = require('express').Router();
 const asyncHandler = require('express-async-handler')
+const Repair = require('../../models/Repair');
 
 //GET all scheduled repair appointments http://localhost:3000/api/repairs
 router.get('/', asyncHandler(async (request, response, next) => {
-    response.send('testing get route to api/repairs/')
+    const repairs = await Repair.find();
+    response.json(repairs)
 }))
 
 // POST new repair appointment to the database http://localhost:3000/api/repairs
 router.post('/', asyncHandler(async (request, response, next) => {
-    response.send('testing post route to api/repairs/')
+    const { completed, repairInstructions, appointmentDate, preferredContactMethod } = request.body
+    const repair = new Repair({
+        completed: completed,
+        repairInstructions: repairInstructions,
+        appointmentDate: appointmentDate,
+        preferredContactMethod: preferredContactMethod
+    })
+    await repair.save()
+    response.json('confirmed!')
 }))
 
 // GET a single repair appointment by ID http://localhost:3000/api/repairs/1
-router.get('/:{id}', asyncHandler(async (request, response, next) => {
-    response.send('testing get route to api/repairs/{id}')
+router.get('/:id', asyncHandler(async (request, response, next) => {
+    const repairAppointment = await Repair.findById(request.params.id)
+    response.json(repairAppointment)
 }))
 
 // PUT edit repair info by ID(update) http://localhost:3000/api/repairs/1
