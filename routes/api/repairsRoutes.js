@@ -18,7 +18,7 @@ router.post('/', asyncHandler(async (request, response, next) => {
         preferredContactMethod: preferredContactMethod
     })
     await repair.save()
-    response.json('confirmed!')
+    response.json(repair)
 }))
 
 // GET a single repair appointment by ID http://localhost:3000/api/repairs/1
