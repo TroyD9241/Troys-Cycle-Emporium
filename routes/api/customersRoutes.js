@@ -1,12 +1,12 @@
 const router = require('express').Router();
 const asyncHandler = require('express-async-handler')
 
-//GET all customers https://localhost:3000/api/customers
+//GET all customers http://localhost:3000/api/customers
 router.get('/', asyncHandler(async (request, response, next) => {
     response.json('testing get route to api/customers/')
 }))
 
-// POST a new costumer to the database http://localhost:3000/api/customers
+// POST a new customer to the database http://localhost:3000/api/customers
 router.post('/', asyncHandler(async (request, response, next) => {
     response.send('testing post route to api/customers')
 }))
