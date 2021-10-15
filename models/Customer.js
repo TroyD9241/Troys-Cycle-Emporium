@@ -7,8 +7,7 @@ const CustomersSchema = Schema({
 
     email: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
 
     phoneNumber: {
