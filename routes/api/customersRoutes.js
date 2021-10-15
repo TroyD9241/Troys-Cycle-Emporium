@@ -1,7 +1,7 @@
 const router = require('express').Router();
-const e = require('express');
 const asyncHandler = require('express-async-handler');
 const Customer = require('../../models/Customer');
+const InventoryItem = require('../../models/Inventory');
 
 //GET all customers http://localhost:3000/api/customers
 router.get('/', asyncHandler(async (request, response, next) => {
@@ -44,7 +44,7 @@ router.put('/:id', asyncHandler(async (request, response, next) => {
 
 // DELETE customer by ID http://localhost:3000/api/customers/1
 router.delete('/:id', asyncHandler(async (request, response, next) => {
-    const deletedCustomer = await Customer.deleteOne({ _id: request.params.id })
+    const deletedCustomer = await Customer.findByIdAndDelete({ _id: request.params.id })
     response.json(deletedCustomer)
 }));
 

@@ -1,6 +1,5 @@
-const mongoose = require('mongoose');
-
-const CustomersSchema = mongoose.Schema({
+const { Schema, model } = require('mongoose')
+const CustomersSchema = Schema({
     name: {
         type: String,
         required: true
@@ -9,12 +8,15 @@ const CustomersSchema = mongoose.Schema({
     email: {
         type: String,
         required: true,
+        unique: true
     },
 
     phoneNumber: {
         type: String,
         required: true,
     },
+    bikes: [{ type: Schema.Types.ObjectId, ref: "Inventory" }],
+    repairs: [{ type: Schema.Types.ObjectId, ref: "Repair" }],
 })
 
-module.exports = mongoose.model('Customers', CustomersSchema)
+module.exports = model('Customer', CustomersSchema)
