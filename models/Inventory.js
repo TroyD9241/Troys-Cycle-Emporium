@@ -24,11 +24,6 @@ const InventorySchema = Schema({
         type: Boolean,
         required: false,
     },
-
-    ownerEmail: {
-        type: String,
-        required: true,
-    },
 })
 
 module.exports = model('Inventory', InventorySchema)

@@ -7,15 +7,17 @@ const CustomersSchema = Schema({
 
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
 
     phoneNumber: {
         type: String,
         required: true,
     },
+
     bikes: [{ type: Schema.Types.ObjectId, ref: "Inventory" }],
-    repairs: [{ type: Schema.Types.ObjectId, ref: "Repair" }],
+    repairHistory: [{ type: Schema.Types.ObjectId, ref: "Repair" }],
 })
 
 module.exports = model('Customer', CustomersSchema)

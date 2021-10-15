@@ -4,16 +4,18 @@ const RepairsSchema = Schema({
     customerEmail: {
         type: String,
         required: true,
+        unique: true
     },
     completed: {
         type: Boolean,
         required: true
     },
-    appointmentDate: {
+    scheduledDate: {
         type: Date,
         default: Date.now,
         required: true,
     },
+
     repairInstructions: {
         type: String,
         required: true,

@@ -11,7 +11,6 @@ const Inventory = require('../../models/Inventory');
  *       required:
  *         - itemName
  *         - itemDescription
- *         - ownerEmail
  *       properties:
  *         _id:
  *           type: string
@@ -31,15 +30,11 @@ const Inventory = require('../../models/Inventory');
  *         parts:
  *            type: boolean
  *            description: is the item parts?
- *         ownerEmail:
- *            type: string
- *            description: The email address of the owner
  *       example:
  *         id: d5fE_asz32t33t
  *         itemName: Huffy
  *         itemDescription: A black huffy bicycle
  *         bicycle: true
- *         ownerEmail: demo@demo.com
  */
 
 
