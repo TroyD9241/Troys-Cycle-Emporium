@@ -73,7 +73,18 @@ router.post('/', asyncHandler(async (request, response, next) => {
         preferredContactMethod: preferredContactMethod
     })
     await repair.save()
-    response.json(repair)
+
+    response.json(repair.customerEmail)
+    // .then(repair => {
+    //     const repairId = repair._id
+    //     const userEmail = repair.customerEmail
+    // })
+
+    // .then(() => {
+    //     //     Customer.findOneAndUpdate({ _id:  }, { $set: request.body },)
+    //     //     response.json(repair._userEmail)
+    //     // })
+
 }))
 
 /**
@@ -198,7 +209,7 @@ router.delete('/:id', asyncHandler(async (request, response, next) => {
  */
 
 // POST repair date change by ID http://localhost:3000/api/repairs/1/schedule
-router.post('/:{id}/schedule', asyncHandler(async (request, response, next) => {
+router.patch('/:{id}/schedule', asyncHandler(async (request, response, next) => {
     response.send('testing POST Route to api/repairs/{id}/schedule')
 }))
 
