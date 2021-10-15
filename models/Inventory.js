@@ -1,18 +1,21 @@
-const mongoose = require('mongoose');
+const { Schema, model } = require('mongoose')
 
-const InventorySchema = mongoose.Schema({
+const InventorySchema = Schema({
     itemName: {
         type: String,
         required: true
     },
+
     itemDescription: {
         type: String,
         required: true,
     },
+
     bicycle: {
         type: Boolean,
         required: false,
     },
+
     accessories: {
         type: Boolean,
         required: false,
@@ -21,10 +24,11 @@ const InventorySchema = mongoose.Schema({
         type: Boolean,
         required: false,
     },
-    amountAvailable: {
-        type: Number,
-        required: true
+
+    ownerEmail: {
+        type: String,
+        required: true,
     },
 })
 
-module.exports = mongoose.model('Inventory', InventorySchema)
+module.exports = model('Inventory', InventorySchema)

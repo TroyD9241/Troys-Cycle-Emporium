@@ -10,7 +10,7 @@ router.get('/', asyncHandler(async (request, response, next) => {
 
 // POST a new inventory item to the database http://localhost:3000/api/inventory
 router.post('/', asyncHandler(async (request, response, next) => {
-    const { itemName, itemDescription, bicycle, parts, accessories, amountAvailable } = request.body
+    const { itemName, itemDescription, bicycle, parts, accessories, amountAvailable, ownerEmail } = request.body
     console.log(request.body)
     const inventoryItem = new Inventory({
         itemName: itemName,
@@ -18,7 +18,8 @@ router.post('/', asyncHandler(async (request, response, next) => {
         bicycle: bicycle,
         parts: parts,
         accessories: accessories,
-        amountAvailable: amountAvailable
+        amountAvailable: amountAvailable,
+        ownerEmail: ownerEmail
     })
     await inventoryItem.save()
     response.json(inventoryItem)
@@ -50,7 +51,7 @@ router.put('/:id', asyncHandler(async (request, response, next) => {
 
 // DELETE inventory item by ID http://localhost:3000/api/inventory/1
 router.delete('/:id', asyncHandler(async (request, response, next) => {
-    const deletedInventoryItem = await Inventory.deleteOne({ _id: request.params.id })
+    const deletedInventoryItem = await Inventory.findByIdAndDelete({ _id: request.params.id })
     response.json(deletedInventoryItem)
 }))
 

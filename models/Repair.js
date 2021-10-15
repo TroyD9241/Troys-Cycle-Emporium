@@ -1,14 +1,18 @@
-const mongoose = require('mongoose');
+const { Schema, model } = require('mongoose');
 
-const RepairsSchema = mongoose.Schema({
+const RepairsSchema = Schema({
+    customerEmail: {
+        type: String,
+        required: true,
+    },
     completed: {
         type: Boolean,
         required: true
     },
     appointmentDate: {
         type: Date,
+        default: Date.now,
         required: true,
-        default: Date.now
     },
     repairInstructions: {
         type: String,
@@ -18,7 +22,10 @@ const RepairsSchema = mongoose.Schema({
     preferredContactMethod: {
         type: String,
         required: true
+    },
+    bike: {
+        type: Schema.Types.ObjectId, ref: 'Inventory'
     }
 })
 
-module.exports = mongoose.model('Repairs', RepairsSchema)
+module.exports = model('Repair', RepairsSchema)
