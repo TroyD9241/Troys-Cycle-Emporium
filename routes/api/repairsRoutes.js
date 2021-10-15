@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const asyncHandler = require('express-async-handler')
 const Repair = require('../../models/Repair');
+const Customer = require('../../models/Customer')
 
 // api testing go to http://localhost:3000/api-docs
 

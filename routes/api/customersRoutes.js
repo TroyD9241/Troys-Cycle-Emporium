@@ -17,7 +17,7 @@ const Customer = require('../../models/Customer');
  *       properties:
  *         _id:
  *           type: string
- *           description: The auto-generated id of the book
+ *           description: The auto-generated id of the Customer
  *         name:
  *           type: string
  *           description: The customers name.
@@ -34,27 +34,40 @@ const Customer = require('../../models/Customer');
  *         phoneNumber: '222222'
  */
 
-/**
-  * @openapi
- * /api/customers:
- *   get:
- *     summary: Returns the list of all the customers
- *     tags: [Customers]
- *     responses:
- *       200:
- *         description: The list of the customers
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Customer'
- */
 
 //GET all customers http://localhost:3000/api/customers
 router.get('/', asyncHandler(async (request, response, next) => {
     const customers = await Customer.find();
     response.json(customers)
+    /**
+      * @openapi
+     * /api/customers:
+     *   get:
+     *     summary: Returns the list of all the customers
+     *     tags: [Customers]
+     *     responses:
+     *       200:
+     *         description: The list of the customers
+     *         content:
+     *           application/json:
+     *             schema:
+     *               type: array
+     *               items:
+     *                 $ref: '#/components/schemas/Customer'
+     */
+}));
+
+
+// POST a new customer to the database http://localhost:3000/api/customers
+router.post('/', asyncHandler(async (request, response, next) => {
+    const { name, email, phoneNumber } = request.body
+    const customer = new Customer({
+        name: name,
+        email: email,
+        phoneNumber: phoneNumber
+    })
+    await customer.save()
+    response.json(customer)
 }));
 
 /**
@@ -79,15 +92,9 @@ router.get('/', asyncHandler(async (request, response, next) => {
 */
 
 
-// POST a new customer to the database http://localhost:3000/api/customers
-router.post('/', asyncHandler(async (request, response, next) => {
-    const { name, email, phoneNumber } = request.body
-    const customer = new Customer({
-        name: name,
-        email: email,
-        phoneNumber: phoneNumber
-    })
-    await customer.save()
+// GET a single customer by ID http://localhost:3000/api/customers/1
+router.get('/:id', asyncHandler(async (request, response, next) => {
+    const customer = await Customer.findById(request.params.id)
     response.json(customer)
 }));
 
@@ -112,13 +119,6 @@ router.post('/', asyncHandler(async (request, response, next) => {
  *             schema:
  *               $ref: '#/components/schemas/Customer'
  */
-
-
-// GET a single customer by ID http://localhost:3000/api/customers/1
-router.get('/:id', asyncHandler(async (request, response, next) => {
-    const customer = await Customer.findById(request.params.id)
-    response.json(customer)
-}));
 
 
 // PUT new customer information by ID(update) http://localhost:3000/api/customers/1
@@ -188,4 +188,5 @@ router.delete('/:id', asyncHandler(async (request, response, next) => {
  *       200:
  *         description: The customer was deleted
  */
+
 module.exports = router;
