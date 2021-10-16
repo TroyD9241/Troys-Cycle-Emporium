@@ -13,12 +13,12 @@ const InventorySchema = Schema({
 
     bicycle: {
         type: Boolean,
-        required: false,
+        required: true,
     },
 
     accessories: {
         type: Boolean,
-        required: false,
+        required: true,
     },
     parts: {
         type: Boolean,

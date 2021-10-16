@@ -11,6 +11,9 @@ const Inventory = require('../../models/Inventory');
  *       required:
  *         - itemName
  *         - itemDescription
+ *         - bicycle
+ *         - accessories
+ *         - parts
  *       properties:
  *         _id:
  *           type: string
@@ -35,6 +38,8 @@ const Inventory = require('../../models/Inventory');
  *         itemName: Huffy
  *         itemDescription: A black huffy bicycle
  *         bicycle: true
+ *         parts: false
+ *         accessories: false
  */
 
 

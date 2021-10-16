@@ -43,15 +43,24 @@ app.set('json replacer', (key, value) => {
     }
     return value
 })
+
+
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 app.use(cors())
 app.use(express.json())
 app.use(routes)
 // Connect to DB
-mongoose.connect(process.env.DB_CONNECTION, () => {
-    console.log('connected to database!')
-})
 
+
+main().catch(err => console.log(err));
+async function main() {
+    await mongoose.connect(process.env.DB_CONNECTION, () => {
+        console.log('connected to the database!')
+    })
+}
+// mongoose.connect(process.env.DB_CONNECTION, () => {
+//     console.log('connected to database!')
+// })
 
 app.listen(port, () => {
     console.log(`listening on port:${port}`)
