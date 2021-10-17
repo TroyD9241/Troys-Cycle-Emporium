@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { Router } = require('express');
 const asyncHandler = require('express-async-handler')
 const Inventory = require('../../models/Inventory');
 
@@ -11,6 +12,9 @@ const Inventory = require('../../models/Inventory');
  *       required:
  *         - itemName
  *         - itemDescription
+ *         - bicycle
+ *         - accessories
+ *         - parts
  *       properties:
  *         _id:
  *           type: string
@@ -30,11 +34,17 @@ const Inventory = require('../../models/Inventory');
  *         parts:
  *            type: boolean
  *            description: is the item parts?
+ *         currentStock:
+ *            type: number
+ *            description: How many are in stock?
  *       example:
  *         id: d5fE_asz32t33t
  *         itemName: Huffy
  *         itemDescription: A black huffy bicycle
  *         bicycle: true
+ *         parts: false
+ *         accessories: false
+ *         currentStock: 1
  */
 
 
@@ -63,7 +73,7 @@ router.get('/', asyncHandler(async (request, response, next) => {
 
 // POST a new inventory item to the database http://localhost:3000/api/inventory
 router.post('/', asyncHandler(async (request, response, next) => {
-    const { itemName, itemDescription, bicycle, parts, accessories, amountAvailable, ownerEmail } = request.body
+    const { itemName, itemDescription, bicycle, parts, accessories, currentStock, ownerEmail, owner } = request.body
     console.log(request.body)
     const inventoryItem = new Inventory({
         itemName: itemName,
@@ -71,7 +81,8 @@ router.post('/', asyncHandler(async (request, response, next) => {
         bicycle: bicycle,
         parts: parts,
         accessories: accessories,
-        amountAvailable: amountAvailable,
+        currentStock: currentStock,
+        owner: owner,
         ownerEmail: ownerEmail
     })
     await inventoryItem.save()
@@ -106,6 +117,7 @@ router.get('/:id', asyncHandler(async (request, response, next) => {
     const inventoryItem = await Inventory.findById(request.params.id)
     response.json(inventoryItem)
 }))
+
 
 /**
  * @openapi

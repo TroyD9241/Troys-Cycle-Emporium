@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const asyncHandler = require('express-async-handler');
 const Customer = require('../../models/Customer');
-
 // api testing go to http://localhost:3000/api-docs
 
 /**
@@ -37,7 +36,7 @@ const Customer = require('../../models/Customer');
 
 //GET all customers http://localhost:3000/api/customers
 router.get('/', asyncHandler(async (request, response, next) => {
-    const customers = await Customer.find();
+    const customers = await Customer.findOne();
     response.json(customers)
     /**
       * @openapi

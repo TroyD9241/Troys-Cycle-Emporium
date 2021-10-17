@@ -1,7 +1,9 @@
 const router = require('express').Router();
 const asyncHandler = require('express-async-handler')
 const Repair = require('../../models/Repair');
-const Customer = require('../../models/Customer')
+const Customer = require('../../models/Customer');
+const Inventory = require('../../models/Inventory')
+const { Types } = require('mongoose');
 
 // api testing go to http://localhost:3000/api-docs
 
@@ -64,26 +66,19 @@ router.get('/', asyncHandler(async (request, response, next) => {
 
 // POST new repair appointment to the database http://localhost:3000/api/repairs
 router.post('/', asyncHandler(async (request, response, next) => {
-    const { completed, repairInstructions, appointmentDate, preferredContactMethod, customerEmail } = request.body
+    const { completed, repairInstructions, preferredContactMethod, customerEmail } = request.body
+    // const bike = await Inventory.findOne({ customerEmail: customerEmail })
+    // console.log(bike)
     const repair = new Repair({
         customerEmail: customerEmail,
         completed: completed,
         repairInstructions: repairInstructions,
-        appointmentDate: appointmentDate,
-        preferredContactMethod: preferredContactMethod
+        preferredContactMethod: preferredContactMethod,
     })
     await repair.save()
+    response.json(repair)
+    await Customer.findOneAndUpdate({ email: customerEmail }, { $push: { repairHistory: repair } })
 
-    response.json(repair.customerEmail)
-    // .then(repair => {
-    //     const repairId = repair._id
-    //     const userEmail = repair.customerEmail
-    // })
-
-    // .then(() => {
-    //     //     Customer.findOneAndUpdate({ _id:  }, { $set: request.body },)
-    //     //     response.json(repair._userEmail)
-    //     // })
 
 }))
 
