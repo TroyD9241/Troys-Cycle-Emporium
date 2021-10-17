@@ -1,7 +1,10 @@
 # Troys-Cycle-Emporium
 
-### Welcome to your #1 cycling shop in Chicago!
+## Welcome to your #1 cycling shop in Chicago!
 
+### Links
+> 1.  *[Getting Started](#getting-started)*
+> 2. *[Using OpenApi](#using-openapi)*
 ## **Getting Started**
 
 1. The first step is to clone the repo from **[this](https://github.com/TroyD9241/Troys-Cycle-Emporium)** Github repository.
