@@ -4,18 +4,11 @@ const RepairsSchema = Schema({
     customerEmail: {
         type: String,
         required: true,
-        unique: true
     },
     completed: {
         type: Boolean,
         required: true
     },
-    scheduledDate: {
-        type: Date,
-        default: Date.now,
-        required: true,
-    },
-
     repairInstructions: {
         type: String,
         required: true,
@@ -25,9 +18,10 @@ const RepairsSchema = Schema({
         type: String,
         required: true
     },
-    bike: {
-        type: Schema.Types.ObjectId, ref: 'Inventory'
-    }
+
+    customer: { type: Schema.Types.ObjectId, ref: 'Customer' },
+    bike: [{ type: Schema.Types.ObjectId, ref: 'Inventory' }]
 })
+
 
 module.exports = model('Repair', RepairsSchema)

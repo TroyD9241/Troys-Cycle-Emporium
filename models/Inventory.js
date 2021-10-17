@@ -24,6 +24,23 @@ const InventorySchema = Schema({
         type: Boolean,
         required: false,
     },
+
+    currentStock: {
+        type: Number,
+        required: true,
+        default: 0
+    },
+
+    owner: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
+
+    ownerEmail: {
+        type: String,
+        required: false
+    }
 })
 
 module.exports = model('Inventory', InventorySchema)
