@@ -46,7 +46,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 app.use(cors())
 app.use(morgan())
 app.use(express.json())
-app.use(routes)
+app.use(routes) // localhost:3000
 
 // Basic error handling middleware
 app.use((request, response, next) => {
