@@ -1,17 +1,25 @@
+// require statements
 const express = require('express');
 const mongoose = require('mongoose');
+const morgan = require('morgan')
 const cors = require('cors');
 const swaggerJsDoc = require('swagger-jsdoc')
+
+// initializations
 const swaggerUi = require('swagger-ui-express')
-
-require('dotenv/config');
-// express configs
-
 const routes = require('./routes');
 const port = 3000;
+const app = express();
+require('dotenv/config');
 
-// middlewares
-
+// express configs
+app.set('json replacer', (key, value) => {
+    // undefined values are set to 'null'
+    if (typeof value === "undefined") {
+        return null
+    }
+    return value
+})
 
 // swagger
 const options = {
@@ -32,36 +40,39 @@ const options = {
 };
 const specs = swaggerJsDoc(options)
 
-const app = express();
 
 // middlewares
-
-app.set('json replacer', (key, value) => {
-    // undefined values are set to 'null'
-    if (typeof value === "undefined") {
-        return null
-    }
-    return value
-})
-
-
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 app.use(cors())
+app.use(morgan())
 app.use(express.json())
 app.use(routes)
+
+// Basic error handling middleware
+app.use((request, response, next) => {
+    const error = new Error('Not Found');
+    error.status = 404;
+    next(error)
+})
+
+app.use((error, request, response, next) => {
+    response.status(error.status || 500);
+    response.json({
+        error: {
+            message: error.message
+        }
+    })
+})
+
 // Connect to DB
-
-
 main().catch(err => console.log(err));
 async function main() {
     await mongoose.connect(process.env.DB_CONNECTION, () => {
         console.log('connected to the database!')
     })
 }
-// mongoose.connect(process.env.DB_CONNECTION, () => {
-//     console.log('connected to database!')
-// })
 
+// start the app
 app.listen(port, () => {
     console.log(`listening on port:${port}`)
 })
