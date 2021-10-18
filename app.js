@@ -5,12 +5,12 @@ const morgan = require('morgan')
 const cors = require('cors');
 const swaggerJsDoc = require('swagger-jsdoc')
 
+require('dotenv/config');
 // initializations
 const swaggerUi = require('swagger-ui-express')
 const routes = require('./routes');
 const port = 3000;
 const app = express();
-require('dotenv/config');
 
 // express configs
 app.set('json replacer', (key, value) => {
@@ -71,6 +71,31 @@ async function main() {
         console.log('connected to the database!')
     })
 }
+
+// CONNECTION EVENTS
+
+// When successfully connected
+mongoose.connection.on('connected', function () {
+    console.log('Mongoose connection open');
+});
+
+// If the connection throws an error
+mongoose.connection.on('error', function (err) {
+    console.log('Mongoose default connection error: ' + err);
+});
+
+// When the connection is disconnected
+mongoose.connection.on('disconnected', function () {
+    console.log('Mongoose default connection disconnected');
+});
+
+// If the Node process ends, close the Mongoose connection
+process.on('SIGINT', function () {
+    mongoose.connection.close(function () {
+        console.log('Mongoose default connection disconnected through app termination');
+        process.exit(0);
+    });
+});
 
 // start the app
 app.listen(port, () => {

@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose')
+
 const CustomersSchema = Schema({
     name: {
         type: String,
@@ -14,6 +15,7 @@ const CustomersSchema = Schema({
     phoneNumber: {
         type: String,
         required: true,
+        max: 15
     },
 
     bikes: [{ type: Schema.Types.ObjectId, ref: "Inventory" }],

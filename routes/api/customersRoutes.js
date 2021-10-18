@@ -34,6 +34,7 @@ const Customer = require('../../models/Customer');
  *         phoneNumber: '222222'
  */
 
+//? ^^ code in this format is essential for OpenAPI to run, please do not change.
 
 //! GET all customers http://localhost:3000/api/customers
 router.get('/', asyncHandler(async (request, response, next) => {
@@ -95,7 +96,8 @@ router.post('/', asyncHandler(async (request, response, next) => {
 
 //! GET a single customer by ID http://localhost:3000/api/customers/1
 router.get('/:id', asyncHandler(async (request, response, next) => {
-    const customer = await Customer.findById(request.params.id)
+    const id = request.params.id
+    const customer = await Customer.findById(id)
     response.json(customer)
     /**
      * @openapi
@@ -125,7 +127,8 @@ router.get('/:id', asyncHandler(async (request, response, next) => {
 //! PUT new customer information by ID(update) http://localhost:3000/api/customers/1
 router.put('/:id', asyncHandler(async (request, response, next) => {
     const { name, email, phoneNumber } = request.body
-    const updatedCustomer = await Customer.updateOne({ _id: request.params.id },
+    const id = request.params.id
+    const updatedCustomer = await Customer.updateOne({ _id: id },
         {
             $set:
             {
@@ -167,7 +170,8 @@ router.put('/:id', asyncHandler(async (request, response, next) => {
 
 //! DELETE customer by ID http://localhost:3000/api/customers/1
 router.delete('/:id', asyncHandler(async (request, response, next) => {
-    const deletedCustomer = await Customer.findByIdAndDelete({ _id: request.params.id })
+    const id = request.params.id
+    const deletedCustomer = await Customer.findByIdAndDelete({ _id: id })
     response.json(deletedCustomer)
     /**
      * @openapi

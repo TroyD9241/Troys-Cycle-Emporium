@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const { Router } = require('express');
 const asyncHandler = require('express-async-handler')
 const Inventory = require('../../models/Inventory');
 const Customer = require('../../models/Customer');
@@ -50,6 +49,8 @@ const Repair = require('../../models/Repair');
  *         accessories: false
  *         currentStock: 1
  */
+
+//? ^^ code in this format is essential for OpenAPI to run, please do not change.
 
 
 //! GET all items in the inventory http://localhost:3000/api/invetory
