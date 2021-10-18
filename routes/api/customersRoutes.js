@@ -38,6 +38,7 @@ const Customer = require('../../models/Customer');
 //! GET all customers http://localhost:3000/api/customers
 router.get('/', asyncHandler(async (request, response, next) => {
     const customers = await Customer.find({});
+
     response.json(customers)
     /**
       * @openapi
