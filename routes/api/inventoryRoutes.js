@@ -106,11 +106,13 @@ router.post('/', asyncHandler(async (request, response, next) => {
     } else {
         console.log('added to Inventory!')
     };
+
     if (owner && bicycle === true) {
         await Repair.findOneAndUpdate({ completed: false }, { $push: { bike: inventoryItem } })
     } else {
         console.log('this bike already is being serviced, plus update your appointment!')
     };
+
     if (owner && parts || owner && accessories === true) {
         await Repair.findOneAndUpdate({ customerEmail: ownerEmail }, { $push: { inventoryItems: inventoryItem } })
     } else {
