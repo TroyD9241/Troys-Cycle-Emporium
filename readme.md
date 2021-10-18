@@ -8,6 +8,7 @@
 > 3. *[Architecture](#api-architecture)*
 > 4. *[Overview](#overview)*
 > 5. *[Technologies](#technologies-used)*
+> 6. *[Libraries](#libraries-implemented)*
 ## **Getting Started**
 
 1. The first step is to clone the repo from **[this](https://github.com/TroyD9241/Troys-Cycle-Emporium)** Github repository.
@@ -30,9 +31,10 @@ For more info on the Connection String URI please see the [documentation](https:
 
 6. Then simply go to the OpenAPI documentation [**`HERE`**](http://localhost:3000/api-docs/) and begin testing the routes~!
 
-## **Please create in this order Customer-Repair-Inventory(if creating a bike) :)**
-
-
+## **Please create in this order**
+1. Customer
+2. Repair Appointment
+3. Inventory Item
 
 -----
 
@@ -74,3 +76,21 @@ Built using the worlds most popular Javascript runtime, Node gives engineers the
 Express is an industry standard framework for building server side applications. Allowing use to write requests for HTTP verbs and run these requests through "middlewares" which can do a host of wonderful things.
 
 **MongoDB**
+
+MongoDB unlike SQL based Databases is non-relational. Meaning you design your schema to be exactly what you want without the need to create relations using foreign-keys. MongoDB allows for extreme flexibility and scalability. Mongo does not require an ORM to wrap data into object form which allows easy access using any programming language with data structures that are native to that language. Mongo also boasts a change friendly design meaning you don't need to bring down a production site to change the way you work with data.
+
+## Libraries Implemented
+
+[Mongoose](https://mongoosejs.com/)
+
+[express-async-handler](https://github.com/Abazhenov/express-async-handler)
+
+[morgan](https://github.com/expressjs/morgan)
+
+[nodemon](https://nodemon.io/)
+
+[swagger-jsdoc](https://github.com/Surnet/swagger-jsdoc)
+
+[swagger-ui-express](https://github.com/scottie1984/swagger-ui-express)
+
+[validator](https://express-validator.github.io/docs/https://express-validator.github.io/docs/https://express-validator.github.io/docs/)
