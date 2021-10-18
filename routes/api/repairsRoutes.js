@@ -53,7 +53,7 @@ const validator = require('validator')
 
 //! GET all scheduled repair appointments http://localhost:3000/api/repairs
 router.get('/', asyncHandler(async (request, response, next) => {
-    const repairs = await Repair.find();
+    const repairs = await Repair.find({ completed: false });
     response.json(repairs)
     /**
       * @openapi
