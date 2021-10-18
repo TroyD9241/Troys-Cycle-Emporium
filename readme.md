@@ -5,6 +5,9 @@
 ### Links
 > 1.  *[Getting Started](#getting-started)*
 > 2. *[Using OpenApi](#using-openapi)*
+> 3. *[Architecture](#api-architecture)*
+> 4. *[Overview](#overview)*
+> 5. *[Technologies](#technologies-used)*
 ## **Getting Started**
 
 1. The first step is to clone the repo from **[this](https://github.com/TroyD9241/Troys-Cycle-Emporium)** Github repository.
@@ -46,3 +49,24 @@ Now from here all you need to do is click on an individual route that is color c
 And finally just click on execute to complete the request! Some routes may require an id or something like that, so simply copy the `_id` from the sample response and plug it into the Id prompt ! :)
 
 ![alt boom!](https://i.ibb.co/m9Jk8bd/boom.png)
+
+-------------------------------
+## API Architecture
+
+This API was built using [Node](https://nodejs.org/en/),[Express](https://expressjs.com/), [MongoDB](https://www.mongodb.com/), and [Atlas](https://www.mongodb.com/cloud/atlas).
+
+## Overview
+
+This API was built to help a bicycle repair shop manage its customers, inventory, and repair appointments.
+
+## Technologies Used
+
+**Node.js**
+
+Built using the worlds most popular Javascript runtime, Node gives engineers the ability to write Javascript code outside of a web browser. Thanks to the exceptionally large community that is known as [npm](https://www.npmjs.com/) Node is extremely flexible and opensource.
+
+**Express**
+
+Express is an industry standard framework for building server side applications. Allowing use to write requests for HTTP verbs and run these requests through "middlewares" which can do a host of wonderful things.
+
+**MongoDB**
