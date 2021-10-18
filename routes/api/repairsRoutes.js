@@ -5,6 +5,9 @@ const Repair = require('../../models/Repair');
 const Customer = require('../../models/Customer');
 const Inventory = require('../../models/Inventory')
 const { Types } = require('mongoose');
+const moment = require('moment');
+
+moment().format();
 
 //? api testing go to http://localhost:3000/api-docs
 
@@ -19,6 +22,7 @@ const { Types } = require('mongoose');
  *         - completed
  *         - repairInstructions
  *         - preferredContactMethod
+ *         - scheduledDate
  *       properties:
  *         _id:
  *           type: string
@@ -35,6 +39,9 @@ const { Types } = require('mongoose');
  *         preferredContactMethod:
  *           type: string
  *           description: How to contact the customer
+ *         scheduledDate:
+ *           type: string
+ *           description: Appointment date mm-dd-yyy
  *       example:
  *         id: d5fE_asz
  *         customerEmail: troy@troy.com
@@ -65,17 +72,22 @@ router.get('/', asyncHandler(async (request, response, next) => {
      */
 }))
 
-
 //! POST new repair appointment to the database http://localhost:3000/api/repairs
 router.post('/', asyncHandler(async (request, response, next) => {
-    const { completed, repairInstructions, preferredContactMethod, customerEmail } = request.body
+    const { completed, repairInstructions, preferredContactMethod, customerEmail, scheduledDate } = request.body
     // const bike = await Inventory.findOne({ customerEmail: customerEmail })
     // console.log(bike)
+    // console.log(typeof scheduledDate)
+    // const formattedDate = moment("YYYY-MM-DD")
+    // console.log(formattedDate)
+    // console.log(date)
     const repair = new Repair({
         customerEmail: customerEmail,
         completed: completed,
         repairInstructions: repairInstructions,
         preferredContactMethod: preferredContactMethod,
+        scheduledDate: scheduledDate
+
     })
     await repair.save()
     response.json(repair)

@@ -2,6 +2,8 @@ const router = require('express').Router();
 const { Router } = require('express');
 const asyncHandler = require('express-async-handler')
 const Inventory = require('../../models/Inventory');
+const Customer = require('../../models/Customer');
+const Repair = require('../../models/Repair');
 
 //? api testing go to http://localhost:3000/api-docs
 
@@ -89,6 +91,18 @@ router.post('/', asyncHandler(async (request, response, next) => {
         ownerEmail: ownerEmail
     });
     await inventoryItem.save()
+
+    if (owner && bicycle === true) {
+        await Customer.findOneAndUpdate({ email: ownerEmail }, { $push: { bikes: inventoryItem } })
+    } else {
+        console.log('added to Inventory!')
+    };
+    if (owner && bicycle === true) {
+        await Repair.findOneAndUpdate({ completed: false }, { $push: { bike: inventoryItem } })
+    } else {
+        console.log('this bike already is being serviced, plus update your appointment!')
+    };
+
 
     response.json(inventoryItem)
     /**

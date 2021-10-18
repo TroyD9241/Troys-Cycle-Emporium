@@ -18,7 +18,14 @@ const RepairsSchema = Schema({
         required: true
     },
 
-    customer: { type: Schema.Types.ObjectId, ref: 'Customer' },
+    ScheduledDate: {
+        type: Date,
+        required: true,
+        default: Date.now(),
+
+    },
+
+    customer: [{ type: Schema.Types.ObjectId, ref: 'Customer' }],
     bike: [{ type: Schema.Types.ObjectId, ref: 'Inventory' }]
 })
 
