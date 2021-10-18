@@ -5,9 +5,8 @@ const Repair = require('../../models/Repair');
 const Customer = require('../../models/Customer');
 const Inventory = require('../../models/Inventory')
 const { Types } = require('mongoose');
-const moment = require('moment');
-
-moment().format();
+const moment = require('moment')
+moment().format()
 
 //? api testing go to http://localhost:3000/api-docs
 
@@ -48,6 +47,7 @@ moment().format();
  *         completed: false
  *         repairInstructions: Change my front tire.
  *         preferredContactMethod: Text
+ *         scheduledDate: '2021-12-25'
  */
 
 //! GET all scheduled repair appointments http://localhost:3000/api/repairs
@@ -75,23 +75,21 @@ router.get('/', asyncHandler(async (request, response, next) => {
 //! POST new repair appointment to the database http://localhost:3000/api/repairs
 router.post('/', asyncHandler(async (request, response, next) => {
     const { completed, repairInstructions, preferredContactMethod, customerEmail, scheduledDate } = request.body
-    // const bike = await Inventory.findOne({ customerEmail: customerEmail })
-    // console.log(bike)
-    // console.log(typeof scheduledDate)
-    // const formattedDate = moment("YYYY-MM-DD")
-    // console.log(formattedDate)
-    // console.log(date)
+
+    const dateString = scheduledDate;
+    const momentObj = moment(dateString, 'YYYY/MM/DD')
+
     const repair = new Repair({
         customerEmail: customerEmail,
         completed: completed,
         repairInstructions: repairInstructions,
         preferredContactMethod: preferredContactMethod,
-        scheduledDate: scheduledDate
+        scheduledDate: momentObj
 
     })
     await repair.save()
-    response.json(repair)
     await Customer.findOneAndUpdate({ email: customerEmail }, { $push: { repairHistory: repair } })
+    response.json(repair)
 
 
     /**
@@ -148,7 +146,7 @@ router.get('/:id', asyncHandler(async (request, response, next) => {
 
 //! PUT edit repair info by ID(update) http://localhost:3000/api/repairs/1
 router.put('/:id', asyncHandler(async (request, response, next) => {
-    const { completed, repairInstructions, appointmentDate, preferredContactMethod, customerEmail } = request.body
+    const { completed, repairInstructions, preferredContactMethod, customerEmail } = request.body
     const updatedRepair = await Repair.updateOne({ _id: request.params.id },
         {
             $set:
@@ -156,7 +154,6 @@ router.put('/:id', asyncHandler(async (request, response, next) => {
                 customerEmail: customerEmail,
                 completed: completed,
                 repairInstructions: repairInstructions,
-                appointmentDate: appointmentDate,
                 preferredContactMethod: preferredContactMethod
             }
         })
@@ -165,7 +162,7 @@ router.put('/:id', asyncHandler(async (request, response, next) => {
      * @openapi
      * /api/repairs/{id}:
      *  put:
-     *    summary: Update the repair by the id
+     *    summary: Update the appointmentDate by Id
      *    tags: [Repairs]
      *    parameters:
      *      - in: path
@@ -217,10 +214,54 @@ router.delete('/:id', asyncHandler(async (request, response, next) => {
 }))
 
 
-//! POST repair date change by ID http://localhost:3000/api/repairs/1/schedule
-router.patch('/:{id}/schedule', asyncHandler(async (request, response, next) => {
-    response.send('testing POST Route to api/repairs/{id}/schedule')
-}))
+//! PUT repair date change by ID http://localhost:3000/api/repairs/1/schedule
+router.put('/:id/schedule', asyncHandler(async (request, response, next) => {
+    const { scheduledDate } = request.body
+    const id = request.params.id
 
+    const dateString = scheduledDate; // this works here
+
+
+    const editedMomentObj = moment(dateString, 'YYYY/MM/DD')
+    // this works on console
+    console.log(typeof editedMomentObj)
+
+    const updatedSchedule = await Repair.updateOne({ _id: id },
+        {
+            $set:
+            {
+                scheduledDate: editedMomentObj
+            }
+        })
+    response.json(updatedSchedule)
+    /**
+     * @openapi
+     * /api/repairs/{id}/schedule:
+     *  put:
+     *    summary: Update the repair schedule by the id
+     *    tags: [Repairs]
+     *    parameters:
+     *      - in: path
+     *        name: id
+     *        schema:
+     *          type: string
+     *        required: true
+     *        description: The repair id.
+     *    requestBody:
+     *      required: true
+     *      content:
+     *        application/json:
+     *          schema:
+     *            $ref: '#/components/schemas/Repairs'
+     *    responses:
+     *      200:
+     *        description: The repair appointment was updated.
+     *        content:
+     *          application/json:
+     *            schema:
+     *              $ref: '#/components/schemas/Repairs'
+     */
+
+}));
 
 module.exports = router
