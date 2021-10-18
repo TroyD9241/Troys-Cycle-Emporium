@@ -20,9 +20,13 @@ const CustomersSchema = Schema({
         max: 15
     },
 
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
+
     bikes: [{ type: Schema.Types.ObjectId, ref: "Inventory" }],
     repairHistory: [{ type: Schema.Types.ObjectId, ref: "Repair" }],
 })
 
-console.log(validator.isEmail('hi@hi.com'))
 module.exports = model('Customer', CustomersSchema)
