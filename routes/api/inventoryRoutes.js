@@ -40,6 +40,12 @@ const Repair = require('../../models/Repair');
  *         currentStock:
  *            type: number
  *            description: How many are in stock?
+ *         owner:
+ *            type: boolean
+ *            description: Does this item have a owner
+ *         ownerEmail:
+ *            type: string
+ *            description: If the item has an owner please enter your associated email.
  *       example:
  *         id: d5fE_asz32t33t
  *         itemName: Huffy
@@ -48,6 +54,8 @@ const Repair = require('../../models/Repair');
  *         parts: false
  *         accessories: false
  *         currentStock: 1
+ *         owner: true
+ *         ownerEmail: troy@troy.com
  */
 
 //? ^^ code in this format is essential for OpenAPI to run, please do not change.
