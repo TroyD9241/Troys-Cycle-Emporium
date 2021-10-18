@@ -1,4 +1,6 @@
 const { Schema, model } = require('mongoose');
+const { DateTime } = require('luxon')
+
 const RepairsSchema = Schema({
     customerEmail: {
         type: String,
@@ -18,14 +20,12 @@ const RepairsSchema = Schema({
         required: true
     },
 
-    ScheduledDate: {
-        type: Date,
+    scheduledDate: {
+        type: String,
         required: true,
-        default: Date.now(),
-
     },
 
-    customer: [{ type: Schema.Types.ObjectId, ref: 'Customer' }],
+    customer: { type: Schema.Types.ObjectId, ref: 'Customer' },
     bike: [{ type: Schema.Types.ObjectId, ref: 'Inventory' }]
 })
 
