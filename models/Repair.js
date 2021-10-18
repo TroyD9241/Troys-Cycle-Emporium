@@ -25,7 +25,8 @@ const RepairsSchema = Schema({
     },
 
     customer: { type: Schema.Types.ObjectId, ref: 'Customer' },
-    bike: [{ type: Schema.Types.ObjectId, ref: 'Inventory' }]
+    bike: [{ type: Schema.Types.ObjectId, ref: 'Inventory' }],
+    inventoryItems: [{ type: Schema.Types.ObjectId, ref: "Inventory" }]
 })
 
 
