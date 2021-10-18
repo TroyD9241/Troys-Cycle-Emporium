@@ -30,6 +30,10 @@ For more info on the Connection String URI please see the [documentation](https:
 
 6. Then simply go to the OpenAPI documentation [**`HERE`**](http://localhost:3000/api-docs/) and begin testing the routes~!
 
+## **Please create in this order Customer-Repair-Inventory(if creating a bike) :)**
+
+
+
 -----
 
 ## Using OpenAPI
