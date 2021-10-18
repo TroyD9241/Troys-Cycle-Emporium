@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose')
+const validator = require('validator')
 
 const CustomersSchema = Schema({
     name: {
@@ -9,7 +10,8 @@ const CustomersSchema = Schema({
     email: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        validate: [validator.isEmail, 'invalid email']
     },
 
     phoneNumber: {
@@ -22,4 +24,5 @@ const CustomersSchema = Schema({
     repairHistory: [{ type: Schema.Types.ObjectId, ref: "Repair" }],
 })
 
+console.log(validator.isEmail('hi@hi.com'))
 module.exports = model('Customer', CustomersSchema)
