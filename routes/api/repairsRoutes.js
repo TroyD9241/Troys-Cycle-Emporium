@@ -5,6 +5,7 @@ const Repair = require('../../models/Repair');
 const Customer = require('../../models/Customer');
 const moment = require('moment')
 moment().format()
+const validator = require('validator')
 
 //? api testing go to http://localhost:3000/api-docs
 
@@ -76,7 +77,7 @@ router.get('/', asyncHandler(async (request, response, next) => {
 router.post('/', asyncHandler(async (request, response, next) => {
     const { completed, repairInstructions, preferredContactMethod, customerEmail, scheduledDate } = request.body
 
-    const momentObj = moment(scheduledDate, 'YYYY/MM/DD')
+    const momentObj = validator.toDate(scheduledDate)
 
     const repair = new Repair({
         customerEmail: customerEmail,
@@ -220,9 +221,9 @@ router.post('/:id/schedule', asyncHandler(async (request, response, next) => {
 
     const id = request.params.id
 
-    const editedMomentObj = moment(scheduledDate, 'YYYY/MM/DD')
-
-    const updatedSchedule = await Repair.replaceOne({ _id: id }, { scheduledDate: editedMomentObj })
+    // const editedMomentObj = moment(scheduledDate, 'YYYY/MM/DD') //? why didnt this work here?
+    const dateObj = validator.toDate(scheduledDate)
+    const updatedSchedule = await Repair.replaceOne({ _id: id }, { scheduledDate: dateObj })
 
     response.json(updatedSchedule)
     /**
