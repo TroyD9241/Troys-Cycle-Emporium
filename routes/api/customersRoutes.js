@@ -171,8 +171,8 @@ router.put('/:id', asyncHandler(async (request, response, next) => {
 //! DELETE customer by ID http://localhost:3000/api/customers/1
 router.delete('/:id', asyncHandler(async (request, response, next) => {
     const id = request.params.id
-    const deletedCustomer = await Customer.findByIdAndDelete({ _id: id })
-    response.json(deletedCustomer)
+    await Customer.findByIdAndDelete({ _id: id })
+    response.json({ deleted: 1 })
     /**
      * @openapi
      * /api/customers/{id}:

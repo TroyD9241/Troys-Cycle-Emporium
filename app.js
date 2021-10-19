@@ -97,7 +97,7 @@ process.on('SIGINT', function () {
     });
 });
 
-// start the app
+// start the app || since I'm not using tests we just listen here, instead of creating a different file.
 app.listen(port, () => {
     console.log(`listening on port:${port}`)
 })

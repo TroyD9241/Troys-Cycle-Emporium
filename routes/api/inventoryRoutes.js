@@ -221,7 +221,7 @@ router.put('/:id', asyncHandler(async (request, response, next) => {
 
 //! DELETE inventory item by ID, if > 1 decrement the stock http://localhost:3000/api/inventory/1
 router.delete('/:id', asyncHandler(async (request, response, next) => {
-    const toBeDeleted = await Inventory.updateOne({ _id: request.params.id, currentStock: { $gt: 0 } },
+    await Inventory.updateOne({ _id: request.params.id, currentStock: { $gt: 0 } },
         { $inc: { currentStock: -1 } },
     )
     response.json({ deleted: 1 })
