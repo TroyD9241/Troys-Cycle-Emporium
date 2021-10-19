@@ -49,7 +49,7 @@ const validator = require('validator')
 
 //? ^^ code in this format is essential for OpenAPI to run, please do not change.
 
-//! GET all scheduled repair appointments http://localhost:3000/api/repairs
+//! GET all scheduled repair appointments| does not include completed http://localhost:3000/api/repairs
 router.get('/', asyncHandler(async (request, response, next) => {
     const repairs = await Repair.find({ completed: false });
     response.json(repairs)
@@ -190,8 +190,8 @@ router.put('/:id', asyncHandler(async (request, response, next) => {
 
 //! DELETE repair by ID http://localhost:3000/api/repairs/1
 router.delete('/:id', asyncHandler(async (request, response, next) => {
-    const deletedRepair = await Repair.findByIdAndDelete({ _id: request.params.id })
-    response.json(deletedRepair)
+    await Repair.findByIdAndDelete({ _id: request.params.id })
+    response.json({ deleted: 1 })
     /**
      * @openapi
      * /api/repairs/{id}:
