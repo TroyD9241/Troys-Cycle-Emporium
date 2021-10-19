@@ -17,13 +17,8 @@
 
 3. **`npm install`**
 
-4. You can create an environment variable modeled after the *`.env.example`* file. The *`DB_CONNECTION`* is your Connection String URI.
+4. You can create an environment variable modeled after the *`.env.example`* file. The *`DB_CONNECTION`* is your Connection String URI. Or you can simply rename the `.example.env` to `.env`. *Note: Make sure MongoDB is installed [if you haven't done so](https://zellwk.com/blog/local-mongodb/).*
 
-   **`touch .env`**
-
-   **`echo "DB_CONNECTION=mongodb://mongodb0.example.com:27017" >> .env`**
-
-This is a standalone Connection String that does not enforce access control, meaning you should just be able to copy and paste and have access! This is not ideal, but for quick testing I think its reasonable.
 
 For more info on the Connection String URI please see the [documentation](https://docs.mongodb.com/manual/reference/connection-string/).
 
