@@ -32,7 +32,10 @@ For more info on the Connection String URI please see the [documentation](https:
 3. Inventory Item
 
 -----
+# **Schema Design**
+The basic data flow of this api is that the fictional employees would interact with this api. These employees would first search for a customer record, and if the customer was not in the database they would then create a new record. Once there was an official record of the customer the employee would then create a repair appointment. Once an appointment is created the `appointmentHistory` on the customer instance would store a reference to that `_id`. Finally when the appointment is created the employees would add inventory items related to the repair. A bike instance would append to both the customer(`bikes`) and the repair(`bike`) its related too based on the email index. The same thing would go for Parts and Accessories except they would only append to the Repair ticket(`inventoryItems`).
 
+**note** instead of deleting an inventory item it will decrement the currentStock to zero, but never below zero.
 ## Using OpenAPI
 
 Using [OpenAPI](http://localhost:3000/api-docs/) is quite simple! You should see a screen that looks like this.
