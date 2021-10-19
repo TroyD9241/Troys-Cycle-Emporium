@@ -4,11 +4,12 @@
 
 ### Links
 > 1.  *[Getting Started](#getting-started)*
-> 2. *[Using OpenApi](#using-openapi)*
-> 3. *[Architecture](#api-architecture)*
-> 4. *[Overview](#overview)*
-> 5. *[Technologies](#technologies-used)*
-> 6. *[Libraries](#libraries-implemented)*
+> 2. *[Schema Design](#schema-design)*
+> 3. *[Using OpenApi](#using-openapi)*
+> 4. *[Architecture](#api-architecture)*
+> 5. *[Overview](#overview)*
+> 6. *[Technologies](#technologies-used)*
+> 7. *[Libraries](#libraries-implemented)*
 ## **Getting Started**
 
 1. The first step is to clone the repo from **[this](https://github.com/TroyD9241/Troys-Cycle-Emporium)** Github repository.
