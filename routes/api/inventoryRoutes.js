@@ -108,7 +108,7 @@ router.post('/', asyncHandler(async (request, response, next) => {
     };
 
     if (owner && bicycle === true) {
-        await Repair.findOneAndUpdate({ completed: false }, { $push: { bike: inventoryItem } })
+        await Repair.findOneAndUpdate({ completed: false, customerEmail: ownerEmail }, { $push: { bike: inventoryItem } })
     } else {
         console.log('this bike already is being serviced, plus update your appointment!')
     };
