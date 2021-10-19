@@ -108,7 +108,7 @@ router.post('/', asyncHandler(async (request, response, next) => {
     };
 
     if (owner && bicycle === true) {
-        await Repair.findOneAndUpdate({ completed: false }, { $push: { bike: inventoryItem } })
+        await Repair.findOneAndUpdate({ completed: false, customerEmail: ownerEmail }, { $push: { bike: inventoryItem } })
     } else {
         console.log('this bike already is being serviced, plus update your appointment!')
     };
@@ -219,10 +219,12 @@ router.put('/:id', asyncHandler(async (request, response, next) => {
      */
 }))
 
-//! DELETE inventory item by ID http://localhost:3000/api/inventory/1
+//! DELETE inventory item by ID, if > 1 decrement the stock http://localhost:3000/api/inventory/1
 router.delete('/:id', asyncHandler(async (request, response, next) => {
-    const deletedInventoryItem = await Inventory.findByIdAndDelete({ _id: request.params.id })
-    response.json(deletedInventoryItem)
+    const toBeDeleted = await Inventory.updateOne({ _id: request.params.id, currentStock: { $gt: 0 } },
+        { $inc: { currentStock: -1 } },
+    )
+    response.json({ deleted: 1 })
     /**
      * @openapi
      * /api/inventory/{id}:
