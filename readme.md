@@ -51,7 +51,7 @@ Now from here all you need to do is click on an individual route that is color c
 
 ![alt tryitout!](https://i.ibb.co/bRwB6k7/tryitout.png)
 
-And finally just click on execute to complete the request! Some routes may require an id or something like that, so simply copy the `_id` from the sample response and plug it into the Id prompt ! :)
+And finally just click on execute to complete the request! Some routes may require an id so simply copy a completed request's `_id` from the response and plug it into the Id prompt ! :) **Note:**`Remove the _id when sending a put`
 
 ![alt boom!](https://i.ibb.co/m9Jk8bd/boom.png)
 
