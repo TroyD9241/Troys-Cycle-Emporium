@@ -227,7 +227,7 @@ router.post('/:id/schedule', asyncHandler(async (request, response, next) => {
     /**
      * @openapi
      * /api/repairs/{id}/schedule:
-     *  put:
+     *  post:
      *    summary: Update the repair schedule by the id
      *    tags: [Repairs]
      *    parameters:
