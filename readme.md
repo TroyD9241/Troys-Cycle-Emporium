@@ -18,8 +18,8 @@
 
 3. **`npm install`**
 
-4. You can create an environment variable modeled after the *`.env.example`* file. The *`DB_CONNECTION`* is your Connection String URI. Or you can simply rename the `.example.env` to `.env`. *Note: Make sure MongoDB is installed [if you haven't done so](https://zellwk.com/blog/local-mongodb/).*
-
+4. You can create an environment variable modeled after the *`.env.example`* file. The *`DB_CONNECTION`* is your Connection String URI. Or you can simply rename the `.example.env` to `.env`
+*Note: Make sure MongoDB is installed [if you haven't done so](https://zellwk.com/blog/local-mongodb/).*
 
 For more info on the Connection String URI please see the [documentation](https://docs.mongodb.com/manual/reference/connection-string/).
 
@@ -72,11 +72,11 @@ Built using the worlds most popular Javascript runtime, Node gives engineers the
 
 **Express**
 
-Express is an industry standard framework for building server side applications. Allowing use to write requests for HTTP verbs and run these requests through "middlewares" which can do a host of wonderful things.
+Express is an industry standard framework for building server side applications. Allowing us to write requests for HTTP verbs and run these requests through "middlewares" which can do a host of wonderful things.
 
 **MongoDB**
 
-MongoDB unlike SQL based Databases is non-relational. Meaning you design your schema to be exactly what you want without the need to create relations using foreign-keys. MongoDB allows for extreme flexibility and scalability. Mongo does not require an ORM to wrap data into object form which allows easy access using any programming language with data structures that are native to that language. Mongo also boasts a change friendly design meaning you don't need to bring down a production site to change the way you work with data.
+MongoDB unlike SQL based Databases is non-relational meaning you design your schema to be exactly what you want without the need to create relations using foreign-keys. MongoDB allows for extreme flexibility and scalability. Mongo does not require an ORM to wrap data into object form which allows easy access using any programming language with data structures that are native to that language. Mongo also boasts a change friendly design meaning you don't need to bring down a production site to change the way you work with data.
 
 ## Libraries Implemented
 
